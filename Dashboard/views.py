@@ -14,7 +14,3 @@ def contact(request):
 
 def home(request):
     return render(request, 'index.html')
-
-def about(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
