@@ -56,9 +56,10 @@
 
 
             <!-- Signup Form -->
-            <div class="signup form-peice">
-               <form class="signup-form" action="#" method="post">
 
+            <div class="signup form-peice">
+               <form id="signup-form" action="/login/" method="post">
+                  {% csrf_token %}
                   <div class="form-group">
                      <label for="name">Full Name</label>
                      <input autocomplete="off" type="text" name="username" id="name" class="name">
@@ -89,7 +90,7 @@
                   </div>
 
                   <div class="CTA">
-                     <input type="submit" value="Signup Now" id="submit">
+                     <input type="submit" form="signup-form" value="Signup Now" id="submit">
                      <a href="#" class="switch">I have an account</a>
                   </div>
                </form>
