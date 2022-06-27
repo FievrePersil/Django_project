@@ -36,7 +36,8 @@
 
             <!-- Login Form -->
             <div class="login form-peice switched">
-               <form class="login-form" action="#" method="post">
+               <form class="login-form" action="/login/" method="post">
+                  {% csrf_token %}
                   <div class="form-group">
                      <label for="loginemail">Email Adderss</label>
                      <input autocomplete="off" type="email" name="loginemail" id="loginemail" required>
@@ -91,7 +92,7 @@
 
                   <div class="CTA">
                      <input type="submit" form="signup-form" value="Signup Now" id="submit">
-                     <a href="#" class="switch">I have an account</a>
+                     <a href="/login" class="switch">I have an account</a>
                   </div>
                </form>
             </div><!-- End Signup Form -->

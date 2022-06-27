@@ -1,4 +1,5 @@
+from multiprocessing.connection import Client
 from django.contrib import admin
-from .models import User
+from .models import Utilisateur
 # Register your models here.
-admin.site.register(User)
+admin.site.register(Utilisateur)
