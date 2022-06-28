@@ -27,6 +27,15 @@ def contact(request):
 def home(request):
     return render(request, 'index.html')
 
+def profile(request):
+    if 'Utilisateur' in request.session:
+        current_user = request.session['Utilisateur']
+        param = {'current_user': current_user}
+        return render(request, 'profile.html', param)
+    else:
+        return redirect('login')
+    return render(request, 'login.html')
+
 
 
 def save(request):
@@ -39,16 +48,37 @@ def save(request):
         client.save()
         return redirect ('home')
     return render(request, 'login.html')
+
+
 def signin(request):
+    #if request.method == 'POST':
+        #username3 = request.POST['loginemail']
+        #password3 = request.POST['loginPassword']
+        #try:
+          #  user = Utilisateur.objects.get(username = username3)
+        #    if user.password == password3:
+         #       return redirect ('home')
+       # except Utilisateur.DoesNotExist:
+       #     return redirect ('login')
+   # return render (request, 'login.html')
+
     if request.method == 'POST':
-        username3 = request.POST['loginemail']
-        password3 = request.POST['loginPassword']
-        try:
-            user = Utilisateur.objects.get(username = username3)
-            if user.password == password3:
-                return redirect ('home')
-        except Utilisateur.DoesNotExist:
-            return redirect ('login')
-    return render (request, 'login.html')
-    
+        uname = request.POST['loginemail']
+        pwd = request.POST['loginPassword']
+
+        check_user = Utilisateur.objects.filter(username=uname, password=pwd)
+        if check_user:
+            request.session['Utilisateur'] = uname
+            return redirect('profile')
+        else:
+            return redirect('login')
+
+    return render(request, 'login.html')
+
         
+def logout(request):
+    try:
+        del request.session['Utilisateur']
+    except:
+        return redirect('login')
+    return redirect('login')
