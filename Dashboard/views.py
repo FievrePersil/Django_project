@@ -34,7 +34,7 @@ def profile(request):
         return render(request, 'profile.html', param)
     else:
         return redirect('login')
-    return render(request, 'login.html')
+    return render(request, 'signin.html')
 
 
 
@@ -47,7 +47,7 @@ def save(request):
         client = Utilisateur(username=username2, email=email2, password=password2, myphone=phone3)
         client.save()
         return redirect ('home')
-    return render(request, 'login.html')
+    return render(request, 'signin.html')
 
 
 def signin(request):
@@ -63,17 +63,17 @@ def signin(request):
    # return render (request, 'login.html')
 
     if request.method == 'POST':
-        uname = request.POST['loginemail']
-        pwd = request.POST['loginPassword']
+        uname = request.POST['username']
+        pwd = request.POST['password']
 
         check_user = Utilisateur.objects.filter(username=uname, password=pwd)
         if check_user:
             request.session['Utilisateur'] = uname
             return redirect('profile')
         else:
-            return redirect('login')
+            return redirect('profile')
 
-    return render(request, 'login.html')
+    return render(request, 'signin.html')
 
         
 def logout(request):
