@@ -22,7 +22,12 @@ def index(request):
     return render(request, 'index.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    if 'Utilisateur' in request.session:
+        current_user = request.session['Utilisateur']
+        param = {'current_user': current_user}
+        return render(request, 'contact.html', param)
+    else:
+        return redirect('login')
 
 def home(request):
     return render(request, 'index.html')
@@ -41,33 +46,23 @@ def profile(request):
 def save(request):
     if request.method == 'POST':
         username2 = request.POST['username']
-        email2 = request.POST['emailAdress']
+        email2 = request.POST['email']
         phone3 = request.POST['phone']
         password2 = request.POST['password']
         client = Utilisateur(username=username2, email=email2, password=password2, myphone=phone3)
         client.save()
-        return redirect ('home')
-    return render(request, 'signin.html')
+        return redirect ('login')
+    return render(request, 'signup.html')
 
 
 def signin(request):
-    #if request.method == 'POST':
-        #username3 = request.POST['loginemail']
-        #password3 = request.POST['loginPassword']
-        #try:
-          #  user = Utilisateur.objects.get(username = username3)
-        #    if user.password == password3:
-         #       return redirect ('home')
-       # except Utilisateur.DoesNotExist:
-       #     return redirect ('login')
-   # return render (request, 'login.html')
-
     if request.method == 'POST':
         uname = request.POST['username']
         pwd = request.POST['password']
 
         check_user = Utilisateur.objects.filter(username=uname, password=pwd)
         if check_user:
+            #start a session for the current user
             request.session['Utilisateur'] = uname
             return redirect('profile')
         else:
