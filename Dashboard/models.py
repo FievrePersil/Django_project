@@ -1,4 +1,5 @@
 import email
+from enum import auto
 from http import client
 from pyexpat import model
 from random import random
@@ -27,7 +28,6 @@ class Voyage(models.Model):
     destination = models.CharField(max_length=30)
     datedep = models.DateTimeField()
     avion = models.ForeignKey("Avion", on_delete=models.CASCADE)
-    client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
 
 
 
@@ -39,3 +39,8 @@ class Contact(models.Model):
     msg = models.CharField(max_length=150)
     client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
 
+class Reservation(models.Model):
+    resid = models.AutoField(primary_key=True, auto_created=True)
+    client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
+    voy = models.ForeignKey("Voyage", on_delete=models.CASCADE)
+    seatNo = models.IntegerField()

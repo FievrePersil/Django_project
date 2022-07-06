@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 
 from Dashboard import forms
 
-from .models import Contact, Utilisateur
+from .models import Contact, Utilisateur, Voyage
 from django.contrib.auth import login
 # Create your views here.
 
@@ -88,3 +88,7 @@ def logout(request):
     except:
         return redirect('login')
     return redirect('login')
+
+def flights(request):
+    data = Voyage.objects.all()
+    return render (request, 'flights.html', {'voy': data})
