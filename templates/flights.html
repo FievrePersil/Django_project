@@ -45,6 +45,7 @@
             <th scope="col">Destination</th>
             <th scope="col">Depart</th>
             <th scope="col">N.Avion</th>
+            <th>Ticket</th>
           </tr>
         </thead>
         <tbody>
@@ -57,6 +58,7 @@
             <td>{{ v.destination }}</td>
             <td>{{ v.datedep }}</td>
             <td>{{ v.avion }}</td>
+            <td align="center"><i class="bi bi-bookmark-plus"></i></td>
             </tr>
             {% endfor %}
       {% endif %}

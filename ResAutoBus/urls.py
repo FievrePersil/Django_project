@@ -28,7 +28,8 @@ urlpatterns = [
     path('login/', include('Dashboard.urls')),
     path('profile/', include('Dashboard.urls')),
     path('account/', include('Dashboard.urls')),
-    path('flights/', include('Dashboard.urls'))
+    path('flights/', include('Dashboard.urls')),
+    path('verif/', include('Dashboard.urls')),
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,6 +2,7 @@ from ast import Num
 import email
 from email import message
 from imaplib import _Authenticator
+from logging import error
 from multiprocessing import AuthenticationError, dummy
 from pydoc import cli
 from re import template
@@ -57,6 +58,7 @@ def home(request):
 
 def profile(request):
     if 'Utilisateur' in request.session:
+        #if uname in request.session['Utilisateur']
         current_user = request.session['Utilisateur']
         param = {'current_user': current_user}
         return render(request, 'profile.html', param)
@@ -75,9 +77,10 @@ def signin(request):
         if check_user:
             #start a session for the current user
             request.session['Utilisateur'] = uname
-            return redirect('profile')
+            return render(request, 'profile.html' )
         else:
-            return redirect('profile')
+            msg = "Wrong Username or password!"
+            return render(request, 'signin.html', {'msg': msg})
 
     return render(request, 'signin.html')
 
@@ -92,3 +95,6 @@ def logout(request):
 def flights(request):
     data = Voyage.objects.all()
     return render (request, 'flights.html', {'voy': data})
+
+def verif(request):
+    return render (request, 'verification.html')

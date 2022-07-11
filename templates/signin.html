@@ -35,6 +35,9 @@
               <div class="mb-4">
               <h3>Sign In</h3>
               <p class="mb-4">First time here <a href="/signup">Sign Up </a>now!</p>
+              {% if msg %}
+              <p style="color: red;" class="mb-4">{{ msg }}</p>
+              {% endif %}
             </div>
             <form action="/login/" method="post">
               {% csrf_token %}

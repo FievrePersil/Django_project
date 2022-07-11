@@ -44,3 +44,4 @@ class Reservation(models.Model):
     client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
     voy = models.ForeignKey("Voyage", on_delete=models.CASCADE)
     seatNo = models.IntegerField()
+
