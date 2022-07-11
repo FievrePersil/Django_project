@@ -39,9 +39,7 @@ class Contact(models.Model):
     msg = models.CharField(max_length=150)
     client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
 
-class Reservation(models.Model):
-    resid = models.AutoField(primary_key=True, auto_created=True)
+class Reserve(models.Model):
     client = models.ForeignKey("Utilisateur", on_delete=models.CASCADE)
     voy = models.ForeignKey("Voyage", on_delete=models.CASCADE)
-    seatNo = models.IntegerField()
 

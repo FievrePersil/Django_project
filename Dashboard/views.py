@@ -1,13 +1,16 @@
 from ast import Num
 import email
 from email import message
+from hmac import trans_36
 from imaplib import _Authenticator
 from logging import error
 from multiprocessing import AuthenticationError, dummy
+from platform import uname
 from pydoc import cli
 from re import template
 from telnetlib import AUTHENTICATION
 from unittest import loader
+from urllib import request
 from django import views
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
@@ -17,7 +20,7 @@ from django.contrib.auth.decorators import login_required
 
 from Dashboard import forms
 
-from .models import Contact, Utilisateur, Voyage
+from .models import Contact, Reserve, Utilisateur, Voyage
 from django.contrib.auth import login
 # Create your views here.
 
@@ -56,17 +59,6 @@ def contact(request):
 def home(request):
     return render(request, 'index.html')
 
-def profile(request):
-    if 'Utilisateur' in request.session:
-        #if uname in request.session['Utilisateur']
-        current_user = request.session['Utilisateur']
-        param = {'current_user': current_user}
-        return render(request, 'profile.html', param)
-    else:
-        return redirect('login')
-    return render(request, 'signin.html')
-
-
 
 
 def signin(request):
@@ -77,14 +69,29 @@ def signin(request):
         if check_user:
             #start a session for the current user
             request.session['Utilisateur'] = uname
-            return render(request, 'profile.html' )
+            return redirect('profile')
         else:
             msg = "Wrong Username or password!"
             return render(request, 'signin.html', {'msg': msg})
 
     return render(request, 'signin.html')
 
-        
+def reservations(request):
+    uname2 = request.session['Utilisateur']
+    c = Utilisateur.objects.get(username = uname2)
+    reserve = Reserve.objects.filter(client = c)
+    return render (request, 'reservation.html', {'reserve':reserve})
+
+def profile(request):
+    if 'Utilisateur' in request.session:
+        current_user = request.session['Utilisateur']
+        param = {'current_user': current_user}
+        return render(request, 'profile.html', param)
+    else:
+        return redirect('login')
+    return render(request, 'signin.html')
+
+
 def logout(request):
     try:
         del request.session['Utilisateur']
@@ -95,6 +102,3 @@ def logout(request):
 def flights(request):
     data = Voyage.objects.all()
     return render (request, 'flights.html', {'voy': data})
-
-def verif(request):
-    return render (request, 'verification.html')

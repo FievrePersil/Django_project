@@ -29,7 +29,7 @@
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/profile">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/flights">Flights</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/myres">My Reservations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reservation">My Reservations</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
                     </ul>
@@ -58,7 +58,7 @@
             <td>{{ v.destination }}</td>
             <td>{{ v.datedep }}</td>
             <td>{{ v.avion }}</td>
-            <td align="center"><i class="bi bi-bookmark-plus"></i></td>
+            <td align="center"><a href="/reservation"><i class="bi bi-bookmark-plus"></i></a></td>
             </tr>
             {% endfor %}
       {% endif %}

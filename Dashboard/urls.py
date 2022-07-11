@@ -13,6 +13,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('account/', views.logout, name='logout'),
     path('flights/', views.flights, name='flights'),
-    path('verif/', views.verif, name='verif'),
+    path('reservation/', views.reservations, name='reservation'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
