@@ -53,12 +53,19 @@
           
             {% for v in voy %}
             <tr>
-            <th>{{ v.voyid }}</th>
+            <th>
+              {{ v.voyid }}</th>
             <td>{{ v.depart }}</td>
             <td>{{ v.destination }}</td>
             <td>{{ v.datedep }}</td>
             <td>{{ v.avion }}</td>
-            <td align="center"><a href="/reservation"><i class="bi bi-bookmark-plus"></i></a></td>
+            <td align="center">
+              <form action="/reservation/" method="get">
+              <button style="border: none; background: none" type="submit" name="voyid" value="{{ v.voyid }}">
+                <i class="bi bi-bookmark-plus"></i>
+              </form>
+              </td>
+                
             </tr>
             {% endfor %}
       {% endif %}

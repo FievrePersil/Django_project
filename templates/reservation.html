@@ -10,6 +10,7 @@
     {% if reserve %}
     {% for r in reserve %}
     <p>{{ r.client.username }}</p>
+    <p>{{ r.voy.voyid }}</p>
     {% endfor %}
     {% endif %}
 </body>
