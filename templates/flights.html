@@ -23,7 +23,11 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
+              {% if param %}
                 <a class="navbar-brand" href="/profile">TG.</a>
+              {% else %}
+              <a class="navbar-brand" href="/home">TG.</a>
+              {% endif %}
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
@@ -39,7 +43,7 @@
 <div style="position: relative; top: 90px">
     <table class="table">
         <thead>
-          <tr>
+          <tr class="table-secondary">
             <th scope="col">#</th>
             <th scope="col">Ville.Dep</th>
             <th scope="col">Destination</th>
@@ -52,7 +56,7 @@
           {% if voy %}
           
             {% for v in voy %}
-            <tr>
+            <tr class="table-success">
             <th>
               {{ v.voyid }}</th>
             <td>{{ v.depart }}</td>

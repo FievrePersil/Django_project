@@ -21,6 +21,8 @@ class Avion(models.Model):
     nomav = models.CharField(max_length=30, primary_key = True)
     modelav = models.CharField(max_length=30)
     capacite = models.IntegerField()
+    def __str__(self):
+        return self.nomav
 
 class Voyage(models.Model):
     voyid = models.CharField(max_length=20, primary_key= True)
@@ -28,7 +30,8 @@ class Voyage(models.Model):
     destination = models.CharField(max_length=30)
     datedep = models.DateTimeField()
     avion = models.ForeignKey("Avion", on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.voyid
 
 
 class Contact(models.Model):

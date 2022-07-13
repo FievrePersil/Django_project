@@ -17,6 +17,7 @@ from django.http import HttpRequest, HttpResponse
 from django.template import loader
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Now
 
 from Dashboard import forms
 
@@ -88,7 +89,7 @@ def reservations(request):
             reserve = Reserve.objects.filter(client = c)
             return render (request, 'reservation.html', {'reserve':reserve})
         except:
-            return HttpResponse ('there are no reservations!')
+            return HttpResponse ('there are no reservations!')#put an else 
 
 def profile(request):
     if 'Utilisateur' in request.session:
@@ -108,5 +109,5 @@ def logout(request):
     return redirect('login')
 
 def flights(request):
-    data = Voyage.objects.all()
+    data = Voyage.objects.filter(datedep__gt=Now()) #filter only the trips that are not expired
     return render (request, 'flights.html', {'voy': data})
