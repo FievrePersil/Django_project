@@ -110,4 +110,8 @@ def logout(request):
 
 def flights(request):
     data = Voyage.objects.filter(datedep__gt=Now()) #filter only the trips that are not expired
+    if 'Utilisateur' in request.session: 
+        #if the user is logged in the logo in the page will take me to the profile
+        current = request.session['Utilisateur']
+        return render (request, 'flights.html', { 'current':current, 'voy': data})
     return render (request, 'flights.html', {'voy': data})
