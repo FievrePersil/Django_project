@@ -31,11 +31,20 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                      {% if current %}
                         <li class="nav-item"><a class="nav-link" href="/profile">Home</a></li>
+                      {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                      {% endif %}
                         <li class="nav-item"><a class="nav-link" href="/flights">Flights</a></li>
+                        {% if current %}
                         <li class="nav-item"><a class="nav-link" href="/reservation">My Reservations</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Sign Up</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -62,7 +71,7 @@
             <td>{{ v.depart }}</td>
             <td>{{ v.destination }}</td>
             <td>{{ v.datedep }}</td>
-            <td>{{ v.avion }}</td>
+            <td>{{ v.avion }}({{v.avion.modelav}})</td>
             <td align="center">
               <form action="/reservation/" method="get">
               <button style="border: none; background: none" type="submit" name="voyid" value="{{ v.voyid }}">

@@ -78,18 +78,19 @@ def signin(request):
     return render(request, 'signin.html')
 
 def reservations(request):
-    if request.method == 'GET':
-        voyageid = request.GET.get('voyid')
-        try:
-            uname2 = request.session['Utilisateur']
-            c = Utilisateur.objects.get(username = uname2)
-            v = Voyage.objects.get(voyid = voyageid)
-            r = Reserve(client = c, voy = v)
-            r.save()
-            reserve = Reserve.objects.filter(client = c)
-            return render (request, 'reservation.html', {'reserve':reserve})
-        except:
-            return HttpResponse ('there are no reservations!')#put an else 
+    if 'Utilisateur' in request.session:
+        uname2 = request.session['Utilisateur']
+        c = Utilisateur.objects.get(username = uname2)
+        reserve = Reserve.objects.filter(client = c)
+        if request.method == 'GET':
+            voyageid = request.GET.get('voyid')
+            if voyageid is not None:
+                v = Voyage.objects.get(voyid = voyageid)
+                r = Reserve(client = c, voy = v)
+                r.save()
+        return render (request, 'reservation.html', {'reserve': reserve, 'uname2':uname2})
+    else:
+        return render(request, 'signin.html')
 
 def profile(request):
     if 'Utilisateur' in request.session:

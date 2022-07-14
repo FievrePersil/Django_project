@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+
 <body>
+
     {% if reserve %}
     {% for r in reserve %}
-    <p>{{ r.client.username }}</p>
     <p>{{ r.voy.voyid }}</p>
-    {% endfor %}
-    {% endif %}
+      {% endfor %}
+      {% endif %}
+    
 </body>
+
 </html>
