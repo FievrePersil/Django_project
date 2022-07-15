@@ -14,5 +14,6 @@ urlpatterns = [
     path('account/', views.logout, name='logout'),
     path('flights/', views.flights, name='flights'),
     path('reservation/', views.reservations, name='reservation'),
+    path('ticket/', views.ticket, name='reservation')
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

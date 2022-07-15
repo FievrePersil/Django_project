@@ -30,6 +30,7 @@ urlpatterns = [
     path('account/', include('Dashboard.urls')),
     path('flights/', include('Dashboard.urls')),
     path('reservation/', include('Dashboard.urls')),
+    path('ticket/', include('Dashboard.urls')),
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

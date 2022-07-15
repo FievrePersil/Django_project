@@ -116,3 +116,6 @@ def flights(request):
         current = request.session['Utilisateur']
         return render (request, 'flights.html', { 'current':current, 'voy': data})
     return render (request, 'flights.html', {'voy': data})
+
+def ticket(request):
+    return render (request, 'ticket.html')
