@@ -16,11 +16,12 @@
       
       <div class="container">
       <div class="mt-5">
+        <a href="/flights" style="font-size: 15px;"><strong>Go Back</strong></a>
         <h1 style="text-transform: uppercase;">{{ uname2 }}</h1>
         {% if reserve %}
         {% for r in reserve %}
             <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
-              <!-- Basic Plan -->
+              <!-- Reservations -->
               <div class="row align-items-center">
                 <div class="col-12 col-md-4">
                   <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
@@ -65,10 +66,11 @@
                 </ul>
       
                 <div class="col-12 col-md-4 text-center">
-                  <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600"> Print Ticket  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                    <form action="/ticket/" method="get">
+                  <button name="voyid2" value="{{ r.voy.voyid }}" type="submit" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600"> Print Ticket  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
                     <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
                     <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
-                  </svg></a>
+                  </svg></button></form>
                 </div>
               </div>
       

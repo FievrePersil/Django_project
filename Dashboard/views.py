@@ -18,6 +18,8 @@ from django.template import loader
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Now
+import os
+import pdfkit
 
 from Dashboard import forms
 
@@ -118,4 +120,17 @@ def flights(request):
     return render (request, 'flights.html', {'voy': data})
 
 def ticket(request):
-    return render (request, 'ticket.html')
+    if 'Utilisateur' in request.session:
+        uname2 = request.session['Utilisateur']
+        c = Utilisateur.objects.get(username = uname2)
+        if request.method == 'GET':
+            voyageid = request.GET.get('voyid2')
+            if voyageid is not None:
+                v = Voyage.objects.get(voyid = voyageid)
+                reserve = Reserve.objects.get(client = c, voy = v)
+                r = reserve.voy.depart
+                r2 = reserve.voy.destination
+        return render (request, 'ticket.html', {'reserve': reserve, 'uname2':uname2, 'r':r.split('-')[1][0:3], 'r2':r2.split('-')[1][0:3]})
+        #up above i splitted the string in two and then i took only the 3 first letters of the second part
+    else:
+        return HttpResponse('Wrong path please login or make a booking before you request a ticket!')
